@@ -1,6 +1,11 @@
+import { EventEmitter } from '@angular/core';
+
 import { Recipe } from './recipe.model';
 
 export class RecipeService {
+    // public property
+    recipeSelected = new EventEmitter<Recipe>();
+
     // private so recipes can't be accessed from outside
     private recipes: Recipe[] = [
         new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'),
