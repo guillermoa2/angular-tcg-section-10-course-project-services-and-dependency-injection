@@ -17,4 +17,15 @@ export class ShoppingListService {
         // informs other components about the event being emitted
         this.ingredientsChanged.emit(this.ingredients.slice());
     }
+
+    addIngredients(ingredients: Ingredient[]) {
+        // possible solution, but not efficient with large amount of data
+        // for(let ingredient of ingredients) {
+        //     this.addIngredient(ingredient);
+        // }
+
+        // Spread operator used in push method to push list of elements instead of a single array object
+        this.ingredients.push(...ingredients)
+        this.ingredientsChanged.emit(this.ingredients.slice());
+    }
 }

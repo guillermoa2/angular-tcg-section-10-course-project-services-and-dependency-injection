@@ -1,8 +1,10 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
+@Injectable()
 export class RecipeService {
     // public property
     recipeSelected = new EventEmitter<Recipe>();
@@ -26,9 +28,15 @@ export class RecipeService {
             ])
     ];
 
+    constructor(private slService:ShoppingListService) {}
+
     // So recipes can be accessed from outside
     getRecipes() {
         // slice is used to get a copy, and really make sure we don't access the array stored from outside
         return this.recipes.slice();
+    }
+
+    addIngredientsToShoppingList(ingredients: Ingredient[]) {
+        this.slService.addIngredients(ingredients);
     }
 }
